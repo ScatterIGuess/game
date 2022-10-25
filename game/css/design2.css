@@ -1,0 +1,171 @@
+/* -----------------------------------------------*/
+/* ------------------ Variables ------------------ */
+/* ----------------------------------------------- */
+:root{
+    /* Color Variables */
+    --textColor:lightgray;
+    --hoverColor:rgb(86, 104, 167);
+    --bgColor:rgb(36,37,38);
+    --borderColor:rgb(57,58,59);
+
+    /* Size Variables */
+    --gameSize:20vh;
+    --iconSize:2em;
+    --fontSize:1em;
+    --topMargin:calc(var(--iconSize)*2);
+    --gap1:1vh;
+    --gap2:3vh;
+    --gapw1:1vw;
+    --gapw2:3vw;
+}
+
+
+
+
+/* For Phones */
+@media only screen and (max-width: 700px) {
+    #topbar{
+        flex-direction: column;
+        justify-content: space-between;
+        height:calc(var(--topMargin)*1.5); 
+    }
+    #topbar>div{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    #topbar>:nth-child(2){
+        justify-content: center;
+    }
+    #feed{
+        margin: calc(var(--topMargin)*3) 0;  
+    }
+    #searchbox{
+        width: 80vw;
+    }
+}
+
+/* For larger than Phones*/
+@media only screen and (min-width: 701px) {
+    #topbar{
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        height:calc(var(--topMargin)/2);
+        
+    }
+    #feed{
+        margin: var(--topMargin) 0;  
+    }
+    #searchbox{
+        width: 30vw;
+    }
+}
+
+
+/* For all */
+
+body{
+    background-color: var(--bgColor);
+    color:var(--textColor);
+    margin: 0px;
+    padding:0px;
+}
+
+
+#topbar{
+    border-bottom: 2px var(--borderColor) solid;
+    background-color: var(--bgColor);
+    width:100%;
+    padding-top: var(--gap1);
+    padding-bottom: var(--gap1);
+    position: fixed;
+    top:0;
+    display:flex;
+}
+.topdiv{
+    padding: 0 var(--gapw1) ;
+    font-size: var(--fontSize);
+    white-space:nowrap;
+}
+.topdiv>img{
+    vertical-align: middle;
+}
+.tb-left{
+    display: flex;
+    justify-content: start;
+}
+.tb-right{
+    display: flex;
+    justify-content: end;
+}
+.tb-center{
+    display: flex;
+    justify-content: center;
+}
+#logo,#coin{
+    height:var(--iconSize);
+    clip-path: circle();
+}
+#settings,#profile{
+    height: var(--iconSize);
+    clip-path: circle();
+}
+#searchbox{
+    height: var(--iconSize);
+    background-color: var(--borderColor);
+    color: var(--textColor);
+    border: none;
+    border-radius:var(--gap1);
+    padding-left:calc(var(--gap1)*2);
+}
+
+
+#feed{
+    margin-left: 2vw;
+}
+/* Eg Games container */
+#feed>section{
+    display: grid;
+    grid-gap: calc(var(--gap1)/2);
+    grid-template-columns: repeat(auto-fill, var(--gameSize));
+    justify-content: space-around;
+}
+/* Eg indviual Game Container*/
+#feed>section>div{
+    width: var(--gameSize);
+}
+#feed>section>div>a{
+    display: block;
+    color:var(--textColor);
+    text-decoration:none;
+}
+.game-logo{
+    width: var(--gameSize);
+    height: var(--gameSize);
+    border-radius:var(--gap1);   
+}
+
+
+footer{
+    display: flex;
+    justify-content: center;
+    border-top: 1px var(--borderColor) solid;
+}
+footer>div{
+    padding: var(--gap2) var(--gap2);
+    border-right: 1px var(--borderColor) solid;
+    border-left: 1px var(--borderColor) solid;
+}
+footer>div>a{
+    display: block;
+    color:lightgray;
+}
+
+a{
+    color: var(--textColor);
+    font-style:italic;
+}
+a:hover{
+    color: var(--hoverColor);
+}

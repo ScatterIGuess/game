@@ -1,0 +1,30 @@
+#gameCanvas{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px rgb(49, 47, 47) solid;
+    background-color: rgb(17, 17, 17);
+}
+
+#controls{
+    width: 90%;
+    height: 10%;
+    display: grid;
+    grid-gap: 1vw;
+    grid-template-columns: repeat(auto-fill, var(--gameSize));
+    justify-content: space-around;
+    margin-top: 1vh;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px blue solid;
+}
+#controls>div{
+    margin: 0 1vw;
+    display: flex;
+}
+#controls>div>img{
+    height: 4vh;
+    display: inline-block;
+    vertical-align: middle;
+}
+
