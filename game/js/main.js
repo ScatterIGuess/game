@@ -4,13 +4,14 @@ import Server from "./server.js";
 let canvas = document.getElementById("gameCanvas");
 let ctx = canvas.getContext("2d");
 
-let unit = 1;
+let unit = 10;
 let lastTime = 0;
 let prevDt = 0;
-let fpsLimit = 40;
+let fpsLimit = 100;
 
 let server = new Server("ip","port");
 let token = server.connect()
+let lastScreen = [];
 let screen = [];
 
 let lastWidth = 0;
@@ -25,10 +26,39 @@ function resize(){
     console.log("Width:",ctx.canvas.width,"Height:",ctx.canvas.height);
 }
 
+function makeArray(w, h, val) {
+    var arr = [];
+    for(let i = 0; i < w; i++) {
+        arr[i] = [];
+        for(let j = 0; j < h; j++) {
+            arr[i][j] = val;
+        }
+    }
+    return arr;
+}
+
+function comScreen(screen){
+    let result = makeArray(ctx.canvas.width/unit,ctx.canvas.height/unit,0)
+    let i = 0;
+    screen.forEach(e => {
+        let j = 0;
+        e.forEach(element => {
+            if( lastScreen.length == 0 || lastScreen[i][j] != element){
+                result[i][j] = element
+            }
+            j++;
+        });
+        i++;
+    });
+    lastScreen = screen;
+    return result;
+}
+
 function draw(plane){
-    let x = 0
+    plane = comScreen(plane);
+    let x = 0;
     plane.forEach(planeY => {
-        let y = 0
+        let y = 0;
         planeY.forEach(element => {
             if(element!=0){
                 ctx.fillStyle = element;
@@ -64,10 +94,11 @@ function gameLoop(timeStamp){
     if (fps<=fpsLimit){
         prevDt = 0;
         screen = server.getScreen(token);
-        ctx.clearRect(0, 0, ctx.canvas.width,ctx.canvas.height);
-        // draw(screen);
-        console.log("DeltaTime:",deltatime);
-        console.log("FPS:",fps);
+
+        // ctx.clearRect(0, 0, ctx.canvas.width,ctx.canvas.height);
+        draw(screen);
+        // console.log("DeltaTime:",deltatime);
+        // console.log("FPS:",fps);
     }
 
     // Loop

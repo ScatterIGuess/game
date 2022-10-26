@@ -26,7 +26,7 @@ function walls(array,thick=10,color='#e22'){
 }
 function conList(data){
     let result = []
-    data = data.replace("[","").replace("]","").split(",")
+    data = data.replaceAll("[","").replaceAll("]","").replaceAll("'","").split(",")
     let i = 0;
     let j = 0;
     let t = [];
@@ -34,12 +34,14 @@ function conList(data){
         if(j==0){i++;t =[]}
         if (element == "1"){
             t.push("#f00");
-        }
-        else{
+        }else if (element == "0"){
             t.push("#0f8");
         }
+        else{
+            t.push(element)
+        }
         j++;
-        if(j==500){j-=500,result.push(t)}
+        if(j==50){j-=50,result.push(t)}
     });
     return result;
 }
@@ -52,7 +54,7 @@ export default class Server{
         this.websocket = new WebSocket("ws://localhost:8001/");
         this.websocket.addEventListener("message", ({ data }) => {
             this.screen = conList(data);
-            console.log("got data!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            // console.log("got data!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         });
     }
     makeScreen(){
